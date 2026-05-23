@@ -1,0 +1,2 @@
+#!/usr/bin/env dash
+pkill -KILL -u $USER

@@ -1,0 +1,2 @@
+#!/usr/bin/env dash
+wf-recorder -a --file "/home/void/Videos/Desktop Recording/$(date).mp4"

@@ -1,0 +1,2 @@
+#!/usr/bin/env dash
+wlrctl toplevel list | fuzzel --dmenu --anchor top-left --lines 8 --width 20 | cut -d: -f1 | xargs -I{} wlrctl toplevel focus {}

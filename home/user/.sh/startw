@@ -1,0 +1,2 @@
+#!/usr/bin/env dash
+dbus-run-session labwc
