@@ -10,7 +10,7 @@ selected=$(printf '%s\n' "$entries" | fuzzel --lines 3 --dmenu --width 13 --anch
 
 case "$selected" in
   logout)
-   logout; killall start-hyprland
+   killall start-hyprland ; killall -u void
     ;;
   reboot)
     doas reboot 
