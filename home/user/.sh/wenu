@@ -1,0 +1,62 @@
+#!/usr/bin/env dash
+
+pkill fuzzel 2>/dev/null
+
+entries="  Wifimgr
+  Telegram
+  Deadbeef
+  Browser
+  Calculator
+  Editor
+  Gucharmap
+  Gtk-Theme
+  Gimp
+  Waypaper
+  Terminal
+  Smart-terminal
+  File"
+
+
+selected=$(printf '%s\n' "$entries" | fuzzel --dmenu --lines 13 --width 20 --anchor top-left --prompt "Applications > " | awk '{print tolower($2)}')
+
+case "$selected" in
+  file)
+    pcmanfm
+    ;;
+  telegram)
+    Telegram
+    ;;
+  deadbeef)
+    deadbeef
+    ;;
+  browser)
+    firefox 
+    ;;
+  calculator)
+    galculator
+    ;;
+  editor)
+    lite-xl
+    ;;
+  gucharmap)
+    gucharmap
+    ;;
+  gtk-theme)
+    nwg-look
+    ;;
+  gimp)
+    gimp-2.10
+    ;;
+  waypaper)
+    waypaper
+    ;;
+  terminal)
+    foot
+    ;;
+  smart-terminal)
+    foot -a SmartTerm
+    ;;
+  wifimgr)
+    wifimgr
+    ;;
+esac
