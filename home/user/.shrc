@@ -1,0 +1,32 @@
+# =====================================================
+# ALIASES 
+# =====================================================
+alias myip='curl ident.me; echo'
+alias BSD='clear; ufetch; lsblk; '
+alias shrc='vi ~/.shrc'
+alias exrc='vi ~/.exrc'
+alias doas-i='doas su -'
+alias clvitmp='rm -fv /tmp/vi*'
+alias la='ls -la'
+alias pick='hyprpicker'
+alias pkgs='doas pkg search '
+alias pkgls='pkg prime-list '
+alias pkgup='doas pkg update; doas pkg upgrade '
+alias pkgi='doas pkg install '
+alias pkgrm='doas pkg remove $@  '
+alias bsdup='doas freebsd-update fetch; doas freebsd-update install '
+alias bsdclr='doas rm -rf /boot/kernel.old /boot/modules.old'
+
+# =====================================================
+# FUNCTIONS
+# =====================================================
+
+pkgclr() {
+    doas pkg autoremove
+    doas pkg clean -a
+    echo "packages installed: [ $(pkg query '%n' | wc -l | tr -d ' ') ]"
+}
+
+pkgq() {
+echo "packages installed: [ $(pkg query '%n' | wc -l | tr -d ' ') ]"
+}
