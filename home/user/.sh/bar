@@ -2,5 +2,5 @@
 killall wireplumber  
 killall pipewire 
 killall pipewire-pulse 
-dbus-launch waybar -c /home/void/.config/labwc/waybar -s /home/void/.config/labwc/style.css
+dbus-launch waybar -c /home/void/.config/labwc/waybar.conf -s /home/void/.config/labwc/style.css
 
