@@ -1,0 +1,21 @@
+#!/usr/bin/env dash
+
+pkill fuzzel 2>/dev/null
+
+entries=" Logout
+ Reboot
+ Shutdown"
+
+selected=$(printf '%s\n' "$entries" | fuzzel --lines 3 --dmenu --width 13 --anchor top-right --prompt "Session > " | awk '{print tolower($2)}')
+
+case "$selected" in
+  logout)
+   logout; killall start-hyprland
+    ;;
+  reboot)
+    doas reboot 
+    ;;
+   shutdown)
+    doas poweroff 
+    ;;
+esac
