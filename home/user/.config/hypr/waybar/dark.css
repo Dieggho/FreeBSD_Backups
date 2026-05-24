@@ -218,7 +218,7 @@ window#waybar.empty #window {
     background-image: url("/home/void/.config/hypr/waybar/freebsd.png");
     background-position: center;
     background-repeat: no-repeat;
-    background-size: 37px; 
+    background-size: 30px; 
     margin: 3px 3px 3px 3px;
 }
 
