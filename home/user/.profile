@@ -28,12 +28,8 @@ if [ -x /usr/bin/resizewin ] ; then /usr/bin/resizewin -z ; fi
 # Display a random cookie on each login.
 if [ -x /usr/bin/fortune ] ; then /usr/bin/fortune freebsd-tips ; fi
 
-unset HISTFILE
-
-RED=$(printf '\033[1;31m')
-RESET=$(printf '\033[0m')
-
-PS1="${RED}>${RESET} "
+HISTFILE=
+HISTSIZE=9999
  
 export EDITOR=vi
 export PATH=$PATH:$HOME/.sh
