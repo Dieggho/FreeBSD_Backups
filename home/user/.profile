@@ -29,7 +29,11 @@ if [ -x /usr/bin/resizewin ] ; then /usr/bin/resizewin -z ; fi
 if [ -x /usr/bin/fortune ] ; then /usr/bin/fortune freebsd-tips ; fi
 
 unset HISTFILE
-HISTSIZE=0
+
+RED=$(printf '\033[1;31m')
+RESET=$(printf '\033[0m')
+
+PS1="${RED}>${RESET} "
  
 export EDITOR=vi
 export PATH=$PATH:$HOME/.sh
