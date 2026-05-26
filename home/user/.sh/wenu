@@ -2,9 +2,9 @@
 
 pkill fuzzel 2>/dev/null
 
-entries="  Wifimgr
-  Telegram
+entries="  Smart-terminal
   Deadbeef
+  Telegram
   Browser
   Calculator
   Editor
@@ -13,21 +13,20 @@ entries="  Wifimgr
   Gimp
   Waypaper
   Terminal
-  Smart-terminal
   File"
 
 
-selected=$(printf '%s\n' "$entries" | fuzzel --dmenu --lines 13 --width 20 --anchor top-left --prompt "Applications > " | awk '{print tolower($2)}')
+selected=$(printf '%s\n' "$entries" | fuzzel --dmenu --lines 12 --width 20 --anchor top-left --prompt "Applications > " | awk '{print tolower($2)}')
 
 case "$selected" in
   file)
     pcmanfm
     ;;
-  telegram)
-    Telegram
-    ;;
   deadbeef)
     deadbeef
+    ;;
+  telegram)
+    Telegram
     ;;
   browser)
     firefox 
@@ -55,8 +54,5 @@ case "$selected" in
     ;;
   smart-terminal)
     foot -a SmartTerm
-    ;;
-  wifimgr)
-    wifimgr
     ;;
 esac

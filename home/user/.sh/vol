@@ -1,0 +1,25 @@
+#!/bin/sh
+
+INFO=$(pactl get-sink-volume @DEFAULT_SINK@)
+MUTE=$(pactl get-sink-mute @DEFAULT_SINK@)
+
+VOL=$(echo "$INFO" | grep -o '[0-9]\+%' | head -n1 | tr -d '%')
+
+IS_MUTED=$(echo "$MUTE" | awk '{print $2}')
+
+if [ "$IS_MUTED" = "yes" ]; then
+    ICON="󰝟"
+    CLASS="muted"
+else
+    if [ "$VOL" -lt 30 ]; then
+        ICON="󰕿"
+    elif [ "$VOL" -lt 70 ]; then
+        ICON="󰖀"
+    else
+        ICON="󰕾"
+    fi
+
+    CLASS="normal"
+fi
+
+printf '%s %s%%\n' "$ICON" "$VOL" 

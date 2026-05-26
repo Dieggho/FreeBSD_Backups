@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env dash
 
 SSID=$(ifconfig wlan0 | awk -F: '/ssid/ {print $2}' | awk '{print $1}')
 
