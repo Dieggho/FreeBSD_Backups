@@ -12,7 +12,7 @@ alias la='ls -la'
 alias pick='hyprpicker'
 alias pkgs='doas pkg search '
 alias pkgls='pkg prime-list '
-alias pkgup='doas pkg update; doas pkg upgrade '
+alias pkgup='doas pkg upgrade '
 alias pkgi='doas pkg install '
 alias pkgrm='doas pkg remove $@  '
 alias bsdup='doas freebsd-update fetch; doas freebsd-update install '
@@ -45,6 +45,6 @@ fbsdup(){
     fi
     bectl list
     echo
-    uname -a
+    uname -r
     echo "packages installed: [ $(pkg query '%n' | wc -l | tr -d ' ') ]"    
 }
