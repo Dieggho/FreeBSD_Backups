@@ -15,6 +15,7 @@ alias pkgls='pkg prime-list '
 alias pkgup='doas pkg upgrade '
 alias pkgi='doas pkg install '
 alias pkgrm='doas pkg remove $@  '
+alias pkg-resync='doas pkg-static upgrade -f'
 alias bsdup='doas freebsd-update fetch; doas freebsd-update install '
 alias bsdclr='doas rm -rf /boot/kernel.old /boot/modules.old'
 
@@ -48,3 +49,66 @@ fbsdup(){
     uname -r
     echo "packages installed: [ $(pkg query '%n' | wc -l | tr -d ' ') ]"    
 }
+
+bsd-relup() {
+    set -e
+
+    target="${1:?usage: relup <release-version>}"
+
+    be="relup-${target}-$(date +%Y%m%d-%H%M)"
+
+    echo "[ creating boot environment ]"
+    doas bectl create "$be"
+    doas bectl activate "$be"
+
+    echo
+    echo "[ fetching FreeBSD ${target} ]"
+    doas freebsd-update upgrade -r "$target"
+
+    echo
+    echo "[ installing upgrade stage 1 ]"
+    doas freebsd-update install
+
+    echo
+    echo "[ release upgrade prepared ]"
+    echo "reboot required to continue upgrade"
+
+    echo
+    echo "active boot environment: $be"
+}
+
+bsd-relup-finish() {
+    set -e
+
+    echo "[ continuing freebsd-update ]"
+    doas freebsd-update install
+
+    echo
+    echo "[ resyncing packages ]"
+    doas pkg-static upgrade -f
+
+    echo
+    echo "[ finalizing upgrade ]"
+    doas freebsd-update install || true
+
+    echo
+    echo "[ system status ]"
+    uname -a
+
+    echo
+    echo "packages installed: [ $(pkg query '%n' | wc -l | tr -d ' ') ]"
+}
+
+beroll() {
+    doas bectl activate "$1"
+    echo "boot environment '$1' activated"
+    echo "reboot required"
+}
+
+be-pkgup() {
+    be="pkgup-$(date +%Y%m%d-%H%M)"
+    doas bectl create "$be"
+    doas bectl activate "$be"
+    doas pkg upgrade
+}
+
