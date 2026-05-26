@@ -17,7 +17,6 @@ alias pkgi='doas pkg install '
 alias pkgrm='doas pkg remove $@  '
 alias bsdup='doas freebsd-update fetch; doas freebsd-update install '
 alias bsdclr='doas rm -rf /boot/kernel.old /boot/modules.old'
-alias hypr='start-hyprland'
 
 # =====================================================
 # FUNCTIONS
@@ -31,4 +30,21 @@ pkgclr() {
 
 pkgq() {
 echo "packages installed: [ $(pkg query '%n' | wc -l | tr -d ' ') ]"
+}
+
+fbsdup(){
+    echo "pkg update..."
+    doas pkg upgrade
+    echo
+    echo "freebsd update..."
+    doas freebsd-update fetch
+    doas freebsd-update install
+    echo
+    if [ -f /var/run/reboot-required ]; then
+    echo "reboot required"
+    fi
+    bectl list
+    echo
+    uname -a
+    echo "packages installed: [ $(pkg query '%n' | wc -l | tr -d ' ') ]"    
 }
