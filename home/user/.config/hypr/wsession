@@ -10,7 +10,7 @@ selected=$(printf '%s\n' "$entries" | fuzzel --lines 3 --dmenu --width 13 --anch
 
 case "$selected" in
   logout)
-   hyprctl dispatch exit ; killall -u void 
+   killall -u void 
     ;;
   reboot)
     doas reboot 
