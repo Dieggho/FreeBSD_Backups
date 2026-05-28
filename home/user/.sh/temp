@@ -1,0 +1,7 @@
+#!/usr/bin/env dash
+while true
+do
+ clear
+ sysctl -a | grep temperature  
+ sleep 0.5
+done 
