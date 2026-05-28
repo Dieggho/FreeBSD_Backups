@@ -112,3 +112,13 @@ be-pkgup() {
     doas pkg upgrade
 }
 
+# bindings
+bind '^L=clear-screen'
+bind '^[[A=up-history'
+bind '^[[B=down-history'
+bind '^[[C=forward-char'
+bind '^[[D=backward-char'
+
+PS1=$'\e[1;31m>\e[0m '
+
+

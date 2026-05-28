@@ -1,0 +1,76 @@
+# =====================================================
+# ~/.mkshrc
+# =====================================================
+
+# PATH
+export PATH="$PATH:$HOME/.sh"
+
+# =====================================================
+# ENV
+# =====================================================
+
+export EDITOR=vi
+export PAGER=less
+
+# =====================================================
+# HISTORY
+# =====================================================
+
+export HISTFILE="$HOME/.mksh_history"
+export HISTSIZE=1000
+
+set -o emacs
+
+# =====================================================
+# PROMPT
+# =====================================================
+
+PS1=$'\e[1;31m>\e[0m '
+
+# =====================================================
+# ALIASES
+# =====================================================
+
+alias h='history'
+alias j='jobs -l'
+
+alias la='ls -la'
+alias lf='ls -FA'
+alias ll='ls -lAF'
+
+alias myip='curl ident.me; echo'
+alias BSD='clear; ufetch; lsblk'
+
+alias shrc='vi ~/.mkshrc'
+alias exrc='vi ~/.exrc'
+
+alias doas-i='doas su -'
+
+alias clvitmp='rm -fv /tmp/vi*'
+
+alias pick='hyprpicker'
+
+alias pkgs='doas pkg search'
+alias pkgls='pkg prime-list'
+
+alias pkgup='doas pkg update && doas pkg upgrade'
+
+alias pkgi='doas pkg install'
+alias pkgrm='doas pkg remove'
+
+alias pkgclr='doas pkg autoremove && doas pkg clean -a && echo "packages installed: [ $(pkg query "%n" | wc -l | xargs) ]"'
+
+alias bsdup='doas freebsd-update fetch && doas freebsd-update install'
+
+alias bsdclr='doas rm -rf /boot/kernel.old /boot/modules.old'
+
+alias pkgq='echo "packages installed: [ $(pkg query "%n" | wc -l | xargs) ]"'
+
+alias hypr='start-hyprland'
+
+# bindings
+bind '^L=clear-screen'
+bind '^[[A=up-history'
+bind '^[[B=down-history'
+bind '^[[C=forward-char'
+bind '^[[D=backward-char
