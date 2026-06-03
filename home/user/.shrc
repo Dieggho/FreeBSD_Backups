@@ -2,10 +2,12 @@
 # =====================================================
 # ALIASES 
 # =====================================================
+alias zzz='doas zzz'
 alias myip='curl ident.me; echo'
-alias BSD='clear; ufetch; lsblk; '
-alias shrc='vi ~/.shrc'
-alias exrc='vi ~/.exrc'
+alias bsd='clear; ufetch; gpart show nda0; '
+alias BSD='clear; neofetch; gpart show nda0;'
+alias shrc='nano ~/.shrc'
+alias exrc='nano ~/.exrc'
 alias doas-i='doas su -'
 alias clvitmp='rm -fv /tmp/vi*'
 alias la='ls -la'
@@ -113,12 +115,12 @@ be-pkgup() {
 }
 
 # bindings
-bind '^L=clear-screen'
-bind '^[[A=up-history'
-bind '^[[B=down-history'
-bind '^[[C=forward-char'
-bind '^[[D=backward-char'
+#bind '^L=clear-screen'
+#bind '^[[A=up-history'
+#bind '^[[B=down-history'
+#bind '^[[C=forward-char'
+#bind '^[[D=backward-char'
 
-PS1=$'\e[1;31m>\e[0m '
+#PS1=$'\e[1;31m>\e[0m '
 
 
