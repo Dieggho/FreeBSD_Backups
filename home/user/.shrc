@@ -1,8 +1,14 @@
+HISTFILE=
+HISTSIZE=9999
 
 # =====================================================
 # ALIASES 
 # =====================================================
 alias zzz='doas zzz'
+alias reboot='doas reboot'
+alias Exit='clear ; exit'
+alias du-='doas du -hs ~ ; doas du -hs /usr'
+alias bsded='doas vi /etc/rc.conf ; doas vi /etc/sysctl.conf ; doas vi /boot/loader.conf'
 alias myip='curl ident.me; echo'
 alias bsd='clear; ufetch; gpart show nda0; '
 alias BSD='clear; neofetch; gpart show nda0;'
@@ -16,14 +22,37 @@ alias pkgs='doas pkg search '
 alias pkgls='pkg prime-list '
 alias pkgup='doas pkg upgrade '
 alias pkgi='doas pkg install '
-alias pkgrm='doas pkg remove $@  '
+alias pkgrm='doas pkg remove $@'
 alias pkg-resync='doas pkg-static upgrade -f'
 alias bsdup='doas freebsd-update fetch; doas freebsd-update install '
 alias bsdclr='doas rm -rf /boot/kernel.old /boot/modules.old'
+alias wifiup='doas ifconfig wlan0 up'
+alias wifidown='doas ifconfig wlan0 down'
+alias scanwifi='doas wpa_cli scan; sleep 1; doas wpa_cli scan_results'
+alias ipw='doas ifconfig wlan0 | grep ssid ; doas ifconfig wlan0 | grep inet'
 
 # =====================================================
 # FUNCTIONS
 # =====================================================
+
+rename(){
+for file in *; do
+  if [ -f "$file" ]; then
+    # Extrai a extensão de forma segura
+    ext=$(echo "$file" | awk -F. '{if (NF>1) print $NF}')
+    
+    # Gera o novo nome único
+    novo_nome=$(uuidgen)
+    
+    # Renomeia aplicando a extensão se ela existir
+    if [ -z "$ext" ]; then
+      mv "$file" "$novo_nome"
+    else
+      mv "$file" "${novo_nome}.${ext}"
+    fi
+  fi
+done
+}
 
 pkgclr() {
     doas pkg autoremove

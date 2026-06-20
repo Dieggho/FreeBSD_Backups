@@ -33,6 +33,7 @@ HISTSIZE=9999
  
 export EDITOR=vi
 export PATH=$PATH:$HOME/.sh
+export PATH=$PATH:$HOME/.local/bin
 export XKB_DEFAULT_LAYOUT=br
 export XKB_DEFAULT_MODEL=thinkpad
 export XDG_RUNTIME_DIR="/tmp/$USER-runtime"

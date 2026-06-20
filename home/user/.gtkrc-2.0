@@ -2,8 +2,8 @@
 # Any customization should be done in ~/.gtkrc-2.0.mine instead.
 
 include "/home/void/.gtkrc-2.0.mine"
-gtk-theme-name="cinereus"
-gtk-icon-theme-name="Flat-Remix-Black-Dark"
+gtk-theme-name="Skeuos-Red-Dark"
+gtk-icon-theme-name="MacBuntu-OS-red"
 gtk-font-name="Sans 12"
 gtk-cursor-theme-name="Sunity-cursors"
 gtk-cursor-theme-size=24
