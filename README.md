@@ -1,3 +1,3 @@
 <p align="center">
-  <img src="['home/user/Pictures/Screeshots/Sat Jun 20 08:44:44 -03 2026.png']">
+  <img src="[/home/user/Pictures/Screeshots/Sat Jun 20 08:44:44 -03 2026.png]">
 </p>
