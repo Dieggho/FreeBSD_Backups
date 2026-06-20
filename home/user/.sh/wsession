@@ -11,10 +11,10 @@ selected=$(printf '%s\n' "$entries" | fuzzel --lines 4 --dmenu --width 13 --anch
 
 case "$selected" in
   logout)
-   labwc --exit
+   Kill
     ;;
   suspend)
-    zzz 
+    doas zzz 
     ;;
   reboot)
     doas reboot 

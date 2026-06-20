@@ -1,6 +1,2 @@
-#!/usr/bin/env dash
-#killall wireplumber  
-#killall pipewire 
-#killall pipewire-pulse 
-dbus-launch waybar -c /home/void/.config/hypr/waybar/waybar.conf -s /home/void/.config/hypr/waybar/dark.css
-
+#!/bin/sh
+dbus-launch waybar -c /home/void/.config/hypr/waybar/waybar.conf -s /home/void/.config/hypr/waybar/dark.css &

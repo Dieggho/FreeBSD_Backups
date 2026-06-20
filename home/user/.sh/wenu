@@ -13,46 +13,46 @@ entries="  Smart-terminal
   Gimp
   Waypaper
   Terminal
-  File"
+  File"
 
 
 selected=$(printf '%s\n' "$entries" | fuzzel --dmenu --lines 12 --width 20 --anchor top-left --prompt "Applications > " | awk '{print tolower($2)}')
 
 case "$selected" in
   file)
-    pcmanfm
+    pcmanfm &
     ;;
   deadbeef)
-    deadbeef
+    deadbeef &
     ;;
   telegram)
-    Telegram
+    Telegram &
     ;;
   browser)
-    firefox 
+    firefox &
     ;;
   calculator)
-    galculator
+    galculator &
     ;;
   editor)
-    lite-xl
+    lite-xl &
     ;;
   gucharmap)
-    gucharmap
+    gucharmap &
     ;;
   gtk-theme)
-    nwg-look
+    nwg-look &
     ;;
   gimp)
-    gimp-2.10
+    gimp-2.10 &
     ;;
   waypaper)
-    waypaper
+    waypaper &
     ;;
   terminal)
-    foot
+    foot &
     ;;
   smart-terminal)
-    foot -a SmartTerm
+    foot -a SmartTerm &
     ;;
 esac

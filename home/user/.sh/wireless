@@ -1,0 +1,21 @@
+#!/usr/bin/env dash
+
+pkill fuzzel 2>/dev/null
+
+entries="  Off
+  On
+  wifimgr"
+
+selected=$(printf '%s\n' "$entries" | fuzzel --lines 3 --dmenu --width 15 --anchor top-right --prompt "Wifi > " | awk '{print tolower($2)}')
+
+case "$selected" in
+  off)
+   doas ifconfig wlan0 down
+    ;;
+  on)
+   doas ifconfig wlan0 up 
+    ;;
+  wifimgr)
+   wifimgr
+    ;;
+esac

@@ -1,0 +1,1 @@
+doas kill -9 $(ps -t ttyv2 -o pid=)

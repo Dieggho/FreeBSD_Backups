@@ -1,6 +1,4 @@
 #!/usr/bin/env dash
-killall wireplumber  
-killall pipewire 
-killall pipewire-pulse 
-dbus-launch waybar -c /home/void/.config/labwc/waybar.conf -s /home/void/.config/labwc/style.css
+#doas ifconfig wlan0 down
+dbus-launch waybar -c /home/void/.config/labwc/config.jsonc -s /home/void/.config/labwc/style.css
 
