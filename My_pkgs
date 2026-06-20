@@ -4,7 +4,7 @@ dash \
 deadbeef \
 devd \
 doas \
-drm-61-kmod \
+drm-66-kmod \
 ffmpegthumbnailer \
 firefox \
 foot \
@@ -28,7 +28,7 @@ mako \
 mpv \
 nano \
 neofetch \
-nerd-fonts \
+nerd-fonts-ubuntu \
 nerd-fonts-dejavusansmono \
 nwg-look \
 pamixer \
@@ -45,7 +45,7 @@ skeuos-gtk-themes \
 slurp \
 swww \
 telegram-desktop \
-transmission-cli z
+transmission-cli \
 ufetch \
 unzip \
 waybar \
