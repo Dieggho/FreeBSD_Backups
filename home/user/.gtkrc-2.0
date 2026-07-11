@@ -4,7 +4,7 @@
 include "/home/void/.gtkrc-2.0.mine"
 gtk-theme-name="Skeuos-Red-Dark"
 gtk-icon-theme-name="MacBuntu-OS-red"
-gtk-font-name="Sans 12"
+gtk-font-name="Cantarell 11"
 gtk-cursor-theme-name="Sunity-cursors"
 gtk-cursor-theme-size=24
 gtk-toolbar-style=GTK_TOOLBAR_ICONS
@@ -12,7 +12,7 @@ gtk-toolbar-icon-size=GTK_ICON_SIZE_LARGE_TOOLBAR
 gtk-button-images=1
 gtk-menu-images=1
 gtk-enable-event-sounds=1
-gtk-enable-input-feedback-sounds=1
+gtk-enable-input-feedback-sounds=0
 gtk-xft-antialias=1
 gtk-xft-hinting=1
 gtk-xft-hintstyle="hintslight"
