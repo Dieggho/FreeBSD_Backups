@@ -1,3 +1,2 @@
-#!/usr/bin/env dash
-rm *.core :0 &
-dbus-run-session start-hyprland &
+#!/bin/sh
+dbus-run-session start-hyprland

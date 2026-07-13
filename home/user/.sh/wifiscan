@@ -1,0 +1,6 @@
+#!/bin/sh
+wpa_cli scan
+sleep 1
+wpa_cli scan_results
+sleep 1
+wpa_cli

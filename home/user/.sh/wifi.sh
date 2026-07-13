@@ -1,9 +1,7 @@
-#!/usr/bin/env dash
+#!/bin/sh
 
-SSID=$(ifconfig wlan0 | awk -F: '/ssid/ {print $2}' | awk '{print $1}')
-
-if [ -n "$SSID" ]; then
-    echo "   $SSID%"
+if ifconfig wifibox0 | grep -q "inet "; then
+    echo "   on"
 else
-    echo "󰖪   Offline"
+    echo "󰖪   off"
 fi
