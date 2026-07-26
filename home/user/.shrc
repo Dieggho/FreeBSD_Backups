@@ -26,14 +26,16 @@ alias pkgrm='doas pkg remove $@'
 alias pkg-resync='doas pkg-static upgrade -f'
 alias bsdup='doas freebsd-update fetch; doas freebsd-update install '
 alias bsdclr='doas rm -rf /boot/kernel.old /boot/modules.old'
-alias wifiup='doas ifconfig wlan0 up'
-alias wifidown='doas ifconfig wlan0 down'
+alias wifiup='doas service netif start wifibox0'
+alias wifidown='doas service netif stop wifibox0'
 alias scanwifi='doas wpa_cli scan; sleep 1; doas wpa_cli scan_results'
-alias ipw='doas ifconfig wlan0 | grep ssid ; doas ifconfig wlan0 | grep inet'
+alias wifireload='doas service netif restart wifibox0'
 alias viboot='doas vi /boot/loader.conf' 
 alias virc='doas vi /etc/rc.conf'
 alias visysctl='doas vi /etc/sysctl.conf'
 alias vibsd='doas vi /etc/rc.conf ; doas vi /etc/sysctl.conf ; doas vi /boot/loader.conf'
+alias viwifi='doas vi /usr/local/etc/wifibox/wpa_supplicant/wpa_supplicant.conf'
+alias lswifi='pciconf -lv | grep -B2 -A1 -i Wireless'
 
 # =====================================================
 # FUNCTIONS
@@ -148,12 +150,12 @@ be-pkgup() {
 }
 
 # bindings
-bind '^L=clear-screen'
-bind '^[[A=up-history'
-bind '^[[B=down-history'
-bind '^[[C=forward-char'
-bind '^[[D=backward-char'
+#bind '^L=clear-screen'
+#bind '^[[A=up-history'
+#bind '^[[B=down-history'
+#bind '^[[C=forward-char'
+#bind '^[[D=backward-char'
 
-PS1=$'\e[1;31m>\e[0m '
+#PS1=$'\e[1;31m>\e[0m '
 
 
