@@ -22,6 +22,7 @@
         "on-scroll-up": "moveleft",
         "on-scroll-down": "moveright",
         "on-click-right": "maximize",
+        "on-click-middle": "move_top_level_to",
     },
 
 	"custom/appswitch": {
