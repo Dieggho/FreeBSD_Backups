@@ -45,7 +45,7 @@ local waypaper    = "waypaper"
 -- Or execute your favorite apps at launch like this:
 --
 hl.on("hyprland.start", function () 
-   hl.exec_cmd("waypaper --restore & rm :0 & rm *.core & backlight 100% & cp .config/foot/hyprland-foot.ini .config/foot/foot.ini & mako & waybar & dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY XAUTHORITY & pipewire & wireplumber & mako & mixer pcm=1 & mixer vol=0.65 &")
+   hl.exec_cmd("waypaper --restore & rm :0 & rm *.core & backlight 100% & cp .config/foot/hyprland-foot.ini .config/foot/foot.ini & mako & waybar & dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY XAUTHORITY & pipewire & wireplumber & mako & mixer pcm=1 & mixer vol=0.65 & mixer rec=1 &")
 end)
 
 
@@ -117,8 +117,8 @@ hl.config({
 
         shadow = {
             enabled      = true,
-            range        = 7,
-            render_power = 3,
+            range        = 6,
+            render_power = 6,
             color        = 0xee000000,
         },
 
@@ -274,7 +274,7 @@ local closeWindowBind = hl.bind(mainMod .. " + C", hl.dsp.window.close())
 local closeWindowBind = hl.bind(mainMod .. "+ K", hl.dsp.window.close())
 local closeWindowBind = hl.bind("SUPER + K", hl.dsp.window.close())
 -- closeWindowBind:set_enabled(false)
-hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
+hl.bind(mainMod .. " + SHIFT + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 hl.bind("SUPER + E", hl.dsp.exec_cmd(fileManager))
 hl.bind("SUPER + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + SPACE", hl.dsp.window.float({ action = "toggle" }))
@@ -314,6 +314,10 @@ hl.bind(mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "e-1" }))
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
+-- Fullscreen
+hl.bind("SUPER + F", hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle" }))
+hl.bind("SUPER + SHIFT + F", hl.dsp.window.fullscreen({ action = "toggle" }))
+hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ action = "toggle" }))
 
 -- Laptop multimedia keys for volume and LCD brightness
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("mixer vol=+0.05"), { locked = true, repeating = true })
