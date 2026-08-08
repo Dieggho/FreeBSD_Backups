@@ -1,0 +1,125 @@
+{
+    "output": ["eDP-1"],
+    "spacing": 4,
+		// try to keep it 4px across the config
+    "height":33,
+     "margin-left": 6,
+     "margin-right": 6,
+     "margin-top": 6,
+     "margin-radius": 6,
+     "layer": "top",
+    "modules-left": [ "custom/menu", "ext/workspaces" ],
+    "modules-right": ["cpu", "memory", "battery", "clock", "custom/wifi", "custom/audio", "custom/session","custom/space2"],
+    "battery": {
+        "format": "{icon} {capacity}% ",
+	"interval": 10,
+    },
+   
+	"custom/menu": {
+        "format":"              ",
+        "tooltip": false,
+        "on-click": "/home/void/.sh/wenu",
+        "on-scroll-up": "moveleft",
+        "on-scroll-down": "moveright",
+        "on-click-right": "maximize",
+    },
+
+	"custom/appswitch": {
+        "format":"   App Switcher   ",
+        "tooltip": false,
+        "on-click": "/home/void/.sh/appswitch",
+        "on-click-middle": "pkill fuzzel",
+        "on-click-right": "pkill fuzzel",
+        "on-scroll-up": "wtype -M logo -k 8 -m logo",
+        "on-scroll-down": "wtype -M logo -k 9 -m logo",
+    },
+
+   "ext/workspaces": {
+    //"format": "   {name}   ",
+    //"sort-by-id": true,
+	  "format": "   {icon}   ",
+	  "format-icons": {
+		"1":"Main",
+		"2":"Web",
+		"3":"Net",
+		"4":"Doc",
+		"5":"Term",
+		"6":"Media",
+		"7":"Desk",
+	},
+    "on-click": "activate",
+    //"on-scroll-up": "wtype -M logo -k 8 -m logo",
+    //"on-scroll-down": "wtype -M logo -k 9 -m logo",
+    "on-scroll-up": "rollup",
+    "on-scroll-down": "rolldown",
+    "persistent-workspaces": {
+             "eDP-1": [1, 2, 3, 4, 5, 6, 7],
+       },
+   },
+
+
+    "clock": {
+        // "timezone": "America/Sao_Paulo",
+        // "tooltip-format": "<big>[{:%Y %B}]</big>\n<tt><small>{calendar}</small></tt>",
+        "format": "  {:%A %d %B %Y      %T}",
+	"interval": 1,
+	"on-click": "gsimplecal",
+    },
+
+    "cpu": {
+        "format": "  {usage}%",
+        "on-click": "foot -a SmartTerm -e htop -u void",
+	"interval": 1,
+    },
+
+    "memory": {
+        "format": "  {percentage}%",
+        "on-click": "foot -a SmartTerm -e htop -u void",
+	"interval": 1,
+    },
+
+    "battery": {
+	"bat": "BAT0",
+        "format": "  {capacity}%",
+	"interval": 1,
+    },
+
+"custom/audio": {
+    "exec": "vol",
+    "interval": 1,
+    "format": "{}",
+    "tooltip": false,
+    "on-scroll-up": "mixer vol=+0.05",
+    "on-scroll-down": "mixer vol=-0.05",
+    "on-click": "mixer vol.mute=0",
+    "on-click-right": "mixer vol.mute=1",
+},
+
+"custom/wifi": {
+    "exec": "wifi.sh",
+    "interval": 1,
+    "format": "{}",
+    "tooltip": false,
+    "on-click": "wireless",
+},
+
+	"custom/session": {
+        "format": "       ",
+        "tooltip": false,
+        "on-click": "/home/void/.sh/wsession",
+        "on-scroll-up": "moveup",
+        "on-scroll-down": "movedown",
+        "on-click-right": "hyprctl eval 'hl.dispatch(hl.dsp.window.close())'",
+        "on-click-middle": "wlrctl window close",
+    },
+
+	"custom/space": {
+        "format": "  ",
+        "tooltip": false,
+     },
+
+	"custom/space2": {
+        "format": "",
+        "tooltip": false,
+     },
+}
