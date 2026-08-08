@@ -11,7 +11,7 @@ selected=$(printf '%s\n' "$entries" | fuzzel --lines 4 --dmenu --width 13 --anch
 
 case "$selected" in
   logout)
-   Kill
+    Kill ; sleep 1 ; wayland-logout 
     ;;
   suspend)
     doas zzz 

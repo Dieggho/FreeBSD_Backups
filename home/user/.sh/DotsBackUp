@@ -1,2 +1,2 @@
 #!/bin/sh
-doas rsync -vaizXAP /home/void/.[^.]* /mnt/
+doas rsync -av /home/void/.[^.]* /mnt/

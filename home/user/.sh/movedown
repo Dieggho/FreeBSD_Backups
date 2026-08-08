@@ -1,0 +1,2 @@
+#!/bin/sh
+hyprctl dispatch 'hl.dsp.window.move({ direction = "down" })'
