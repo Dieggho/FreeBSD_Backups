@@ -32,7 +32,8 @@ local fileManager = "pcmanfm"
 local menu        = "fuzzel"
 local screenshot  = "screenshot"
 local SmartTerm   = "foot -a SmartTerm"
-local wlshot = "wlshot"
+local wlshot      = "wlshot"
+local waypaper    = "waypaper"
 
 -------------------
 ---- AUTOSTART ----
@@ -44,7 +45,7 @@ local wlshot = "wlshot"
 -- Or execute your favorite apps at launch like this:
 --
 hl.on("hyprland.start", function () 
-   hl.exec_cmd("rm :0 & rm *.core & backlight 100% & cp .config/foot/hyprland-foot.ini .config/foot/foot.ini & mako & waybar & dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY XAUTHORITY & pipewire & wireplumber & waypaper --restore & mako & mixer pcm=1 & mixer vol=0.65 &")
+   hl.exec_cmd("waypaper --restore & rm :0 & rm *.core & backlight 100% & cp .config/foot/hyprland-foot.ini .config/foot/foot.ini & mako & waybar & dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY XAUTHORITY & pipewire & wireplumber & mako & mixer pcm=1 & mixer vol=0.65 &")
 end)
 
 
@@ -86,8 +87,8 @@ end)
 -- Refer to https://wiki.hypr.land/Configuring/Basics/Variables/
 hl.config({
     general = {
-        gaps_in  = 7,
-        gaps_out = 12,
+        gaps_in  = 6,
+        gaps_out = 13,
 
         border_size = 6,
 
@@ -144,22 +145,22 @@ hl.curve("quick",          { type = "bezier", points = { {0.15, 0},    {0.1, 1} 
 -- Default springs
 hl.curve("easy",           { type = "spring", mass = 1, stiffness = 71.2633, dampening = 15.8273644 })
 
-hl.animation({ leaf = "global",        enabled = true,  speed = 10,   bezier = "default" })
+hl.animation({ leaf = "global",        enabled = true,  speed = 3,   bezier = "default" })
 hl.animation({ leaf = "border",        enabled = true,  speed = 5.39, bezier = "easeOutQuint" })
 hl.animation({ leaf = "windows",       enabled = true,  speed = 4.79, spring = "easy" })
 hl.animation({ leaf = "windowsIn",     enabled = true,  speed = 4.1,  spring = "easy",         style = "popin 87%" })
 hl.animation({ leaf = "windowsOut",    enabled = true,  speed = 1.49, bezier = "linear",       style = "popin 87%" })
-hl.animation({ leaf = "fadeIn",        enabled = true,  speed = 1.73, bezier = "almostLinear" })
-hl.animation({ leaf = "fadeOut",       enabled = true,  speed = 1.46, bezier = "almostLinear" })
+hl.animation({ leaf = "fadeIn",        enabled = true,  speed = 3, bezier = "almostLinear" })
+hl.animation({ leaf = "fadeOut",       enabled = true,  speed = 3, bezier = "almostLinear" })
 hl.animation({ leaf = "fade",          enabled = true,  speed = 3.03, bezier = "quick" })
 hl.animation({ leaf = "layers",        enabled = true,  speed = 3.81, bezier = "easeOutQuint" })
 hl.animation({ leaf = "layersIn",      enabled = true,  speed = 4,    bezier = "easeOutQuint", style = "fade" })
-hl.animation({ leaf = "layersOut",     enabled = true,  speed = 1.5,  bezier = "linear",       style = "fade" })
-hl.animation({ leaf = "fadeLayersIn",  enabled = true,  speed = 1.79, bezier = "almostLinear" })
-hl.animation({ leaf = "fadeLayersOut", enabled = true,  speed = 1.39, bezier = "almostLinear" })
-hl.animation({ leaf = "workspaces",    enabled = true,  speed = 1.94, bezier = "almostLinear", style = "fade" })
-hl.animation({ leaf = "workspacesIn",  enabled = true,  speed = 1.21, bezier = "almostLinear", style = "fade" })
-hl.animation({ leaf = "workspacesOut", enabled = true,  speed = 1.94, bezier = "almostLinear", style = "fade" })
+hl.animation({ leaf = "layersOut",     enabled = true,  speed = 4,  bezier = "linear",       style = "fade" })
+hl.animation({ leaf = "fadeLayersIn",  enabled = true,  speed = 4, bezier = "almostLinear" })
+hl.animation({ leaf = "fadeLayersOut", enabled = true,  speed = 4, bezier = "almostLinear" })
+hl.animation({ leaf = "workspaces",    enabled = true,  speed = 4, bezier = "almostLinear", style = "slide" })
+hl.animation({ leaf = "workspacesIn",  enabled = true,  speed = 4, bezier = "almostLinear", style = "slide" })
+hl.animation({ leaf = "workspacesOut", enabled = true,  speed = 4, bezier = "almostLinear", style = "slide" })
 hl.animation({ leaf = "zoomFactor",    enabled = true,  speed = 7,    bezier = "quick" })
 
 -- Ref https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
@@ -215,8 +216,8 @@ hl.config({
 
 hl.config({
     misc = {
-        force_default_wallpaper = -1,    -- Set to 0 or 1 to disable the anime mascot wallpapers
-        disable_hyprland_logo   = false, -- If true disables the random hyprland logo / anime girl background. :(
+        force_default_wallpaper = 0,    -- Set to 0 or 1 to disable the anime mascot wallpapers
+        disable_hyprland_logo   = true, -- If true disables the random hyprland logo / anime girl background. :(
     },
 })
 
@@ -267,6 +268,7 @@ local mainMod = "MOD5" -- Sets "Windows" key as main modifier
 hl.bind(mainMod .. " + RETURN", hl.dsp.exec_cmd(terminal))
 hl.bind("SUPER + T", hl.dsp.exec_cmd(SmartTerm))
 hl.bind("PRINT", hl.dsp.exec_cmd(screenshot))
+hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(waypaper))
 hl.bind("SHIFT + PRINT", hl.dsp.exec_cmd(wlshot))
 local closeWindowBind = hl.bind(mainMod .. " + C", hl.dsp.window.close())
 local closeWindowBind = hl.bind(mainMod .. "+ K", hl.dsp.window.close())
@@ -314,12 +316,12 @@ hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 
 -- Laptop multimedia keys for volume and LCD brightness
-hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true })
-hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),      { locked = true, repeating = true })
-hl.bind("XF86AudioMute",        hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),     { locked = true, repeating = true })
-hl.bind("XF86AudioMicMute",     hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),   { locked = true, repeating = true })
-hl.bind("XF86MonBrightnessUp",  hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%+"),                  { locked = true, repeating = true })
-hl.bind("XF86MonBrightnessDown",hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%-"),                  { locked = true, repeating = true })
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("mixer vol=+0.05"), { locked = true, repeating = true })
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("mixer vol=-0.05"),      { locked = true, repeating = true })
+hl.bind("XF86AudioMute",        hl.dsp.exec_cmd(""),     { locked = true, repeating = true })
+hl.bind("XF86AudioMicMute",     hl.dsp.exec_cmd(""),   { locked = true, repeating = true })
+hl.bind("XF86MonBrightnessUp",  hl.dsp.exec_cmd("backlight incr 5"),                  { locked = true, repeating = true })
+hl.bind("XF86MonBrightnessDown",hl.dsp.exec_cmd("backlight decr 5"),                  { locked = true, repeating = true })
 
 -- Requires playerctl
 hl.bind("XF86AudioNext",  hl.dsp.exec_cmd("playerctl next"),       { locked = true })
