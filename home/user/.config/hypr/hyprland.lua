@@ -45,7 +45,7 @@ local waypaper    = "waypaper"
 -- Or execute your favorite apps at launch like this:
 --
 hl.on("hyprland.start", function () 
-   hl.exec_cmd("waypaper --restore & rm :0 & rm *.core & backlight 100% & cp .config/foot/hyprland-foot.ini .config/foot/foot.ini & mako & waybar & dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY XAUTHORITY & pipewire & wireplumber & mako & mixer pcm=1 & mixer vol=0.65 & mixer rec=1 &")
+   hl.exec_cmd("waypaper --restore & rm :0 & rm *.core & backlight 100% & cp .config/foot/hyprland-foot.ini .config/foot/foot.ini & mako & waybar & dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY XAUTHORITY & pipewire & wireplumber & mako & mixer pcm=1 & mixer vol=0.65 & mixer rec=0.5 &")
 end)
 
 
@@ -125,7 +125,7 @@ hl.config({
         blur = {
             enabled   = true,
             size      = 4,
-            passes    = 4444,
+            passes    = 4,
             vibrancy  = 0.1696,
         },
     },
