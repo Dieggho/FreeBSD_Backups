@@ -93,8 +93,8 @@ hl.config({
         border_size = 6,
 
         col = {
-            active_border   = { colors = {"rgba(16181Dee)", "rgba(13151699)"}, angle = 99 },
-            inactive_border = "rgba(16181Dee)",
+            active_border   = { colors = {"rgb(16181D)", "rgb(0c0e0e)", "rgb(0c0e0e)"}, angle = 99 },
+            inactive_border = "rgb(16181D)",
         },
 
         -- Set to true to enable resizing windows by clicking and dragging on borders and gaps
@@ -393,6 +393,12 @@ hl.window_rule({
 hl.window_rule({
     name  = "SmartTerm",
     match = { class = "SmartTerm" },
+    float      = true,
+})
+
+hl.window_rule({
+    name  = "galculator",
+    match = { class = "galculator" },
     float      = true,
 })
 
