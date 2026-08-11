@@ -34,6 +34,9 @@ local screenshot  = "screenshot"
 local SmartTerm   = "foot -a SmartTerm"
 local wlshot      = "wlshot"
 local waypaper    = "waypaper"
+local wenu	  = "wenu"
+local wsession	  = "wsession"
+local reloadwaybar = "reloadwaybar"
 
 -------------------
 ---- AUTOSTART ----
@@ -266,7 +269,10 @@ local mainMod = "MOD5" -- Sets "Windows" key as main modifier
 
 -- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
 hl.bind(mainMod .. " + RETURN", hl.dsp.exec_cmd(terminal))
+hl.bind(mainMod .. " + DELETE", hl.dsp.exec_cmd(wsession))
 hl.bind("SUPER + T", hl.dsp.exec_cmd(SmartTerm))
+hl.bind("SUPER + X", hl.dsp.exec_cmd(wenu))
+hl.bind("SUPER + SHIFT + R", hl.dsp.exec_cmd(reloadwaybar))
 hl.bind("PRINT", hl.dsp.exec_cmd(screenshot))
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(waypaper))
 hl.bind("SHIFT + PRINT", hl.dsp.exec_cmd(wlshot))
@@ -415,6 +421,12 @@ hl.window_rule({
 })
 
 hl.window_rule({
+    name  = "pragha",
+    match = { class = "pragha"},
+    workspace = 1,
+})
+
+hl.window_rule({
     name  = "foot",
     match = { class = "foot" },
     workspace = 5,
@@ -430,6 +442,12 @@ hl.window_rule({
     name  = "transmission",
     match = { class = "transmission"},
     workspace = 3,
+})
+
+hl.window_rule({
+    name  = "org.xfce.mousepad",
+    match = { class = "org.xfce.mousepad"},
+    workspace = 4,
 })
 
 hl.window_rule({
@@ -471,6 +489,12 @@ hl.window_rule({
 hl.window_rule({
     name  = "Gimp-2.10",
     match = { class = "Gimp-2.10"},
+    workspace = 6,
+})
+
+hl.window_rule({
+    name  = "gimp",
+    match = { class = "gimp"},
     workspace = 6,
 })
 
