@@ -4,17 +4,18 @@ HISTSIZE=9999
 # =====================================================
 # ALIASES 
 # =====================================================
+
 alias zzz='doas zzz'
 alias reboot='doas reboot'
 alias Exit='clear ; exit'
 alias poweroff='doas poweroff'
 alias du-='doas du -hs ~ ; doas du -hs /usr/local'
 alias myip='curl ident.me; echo'
-alias bsd='clear; ufetch; gpart show nda0; '
-alias BSD='clear; neofetch; gpart show nda0;'
+alias bsd='clear; ufetch; gpart show ada0; '
+alias BSD='clear; neofetch; gpart show ada0;'
 alias shrc='vi ~/.shrc'
 alias exrc='vi ~/.exrc'
-alias doas-i='doas su -'
+alias su-='doas su -'
 alias clvitmp='rm -fv /tmp/vi*'
 alias la='ls -la'
 alias pick='hyprpicker'
@@ -22,7 +23,7 @@ alias pkgs='doas pkg search '
 alias pkgls='pkg prime-list '
 alias pkgup='doas pkg upgrade '
 alias pkgi='doas pkg install '
-alias pkgrm='doas pkg remove $@'
+# alias pkgrm='doas pkg remove $@ '
 alias pkg-resync='doas pkg-static upgrade -f'
 alias bsdup='doas freebsd-update fetch; doas freebsd-update install '
 alias bsdclr='doas rm -rf /boot/kernel.old /boot/modules.old'
@@ -36,6 +37,8 @@ alias visysctl='doas vi /etc/sysctl.conf'
 alias vibsd='doas vi /etc/rc.conf ; doas vi /etc/sysctl.conf ; doas vi /boot/loader.conf'
 alias viwifi='doas vi /usr/local/etc/wifibox/wpa_supplicant/wpa_supplicant.conf'
 alias lswifi='pciconf -lv | grep -B2 -A1 -i Wireless'
+alias vihypr='vi /home/void/.config/hypr/hyprland.lua'
+alias lsblk='gpart show'
 
 # =====================================================
 # FUNCTIONS
@@ -58,6 +61,13 @@ for file in *; do
     fi
   fi
 done
+}
+
+pkgrm() {
+    doas pkg remove $@
+    doas pkg autoremove
+    doas pkg clean -a
+    echo "packages installed: [ $(pkg query '%n' | wc -l | tr -d ' ') ]" 
 }
 
 pkgclr() {
