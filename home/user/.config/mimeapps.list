@@ -1,0 +1,53 @@
+[Removed Associations]
+image/jpeg=feh.desktop
+image/png=feh.desktop
+
+[Added Associations]
+application/x-7z-compressed=un7z.desktop;
+application/x-tar=un7z.desktop;
+application/zip=unzip.desktop;
+x-scheme-handler/http=firefox.desktop;
+x-scheme-handler/https=firefox.desktop;
+x-scheme-handler/chrome=firefox.desktop;
+text/html=firefox.desktop;
+application/x-extension-htm=firefox.desktop;
+application/x-extension-html=firefox.desktop;
+application/x-extension-shtml=firefox.desktop;
+application/xhtml+xml=firefox.desktop;
+application/x-extension-xhtml=firefox.desktop;
+application/x-extension-xht=firefox.desktop;
+application/x-bzip2-compressed-tar=untar.desktop;
+video/webm=mpv loop.desktop;conv2mp3.desktop;
+audio/mpeg=pragha.desktop;deadbeef.desktop;
+image/jpeg=imv.desktop;SetAsWallpaper.desktop;
+image/png=imv.desktop;SetAsWallpaper.desktop;
+video/mp4=mpv loop.desktop;firefox.desktop;
+inode/directory=View.desktop;mpv loop.desktop;Compress.desktop;
+image/svg+xml=imv.desktop;
+image/webp=imv.desktop;SetAsWallpaper.desktop;
+video/x-matroska=mpv loop.desktop;firefox.desktop;
+text/plain=Edit.desktop;
+application/x-shellscript=Edit.desktop;
+
+#[Default Applications]
+#application/x-7z-compressed=un7z.desktop
+#application/x-tar=un7z.desktop
+#x-scheme-handler/http=firefox.desktop
+#x-scheme-handler/https=firefox.desktop
+#x-scheme-handler/chrome=firefox.desktop
+#text/html=firefox.desktop
+#application/x-extension-htm=firefox.desktop
+#application/x-extension-html=firefox.desktop
+#application/x-extension-shtml=firefox.desktop
+#application/xhtml+xml=firefox.desktop
+#application/x-extension-xhtml=firefox.desktop
+#application/x-extension-xht=firefox.desktop
+#application/x-bzip2-compressed-tar=untar.desktop
+#video/webm=userapp-mpv loop.desktop
+#audio/mpeg=pragha.desktop
+#image/jpeg=imv.desktop
+#image/png=imv.desktop
+#video/mp4=mpv loop.desktop
+#image/webp=imv.desktop
+#video/x-matroska=mpv.desktop
+#inode/directory=View.desktop
