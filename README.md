@@ -4,7 +4,7 @@ Despite having my local zfs backups in a ssd, I created this repo to share my ex
 </p>
 
 <p align=left">
-It uses wifibox for a fast wifi experience showing off bhyve capabilities, so if you intend to use be aware that you have to change the hardware passthrough in /boot/loader.conf and /usr/local/wifibox/bhyve.conf.
+It uses wifibox for a fast wifi experience showing off bhyve capabilities, so if you intend to use it be aware that you have to change the hardware passthrough in /boot/loader.conf and /usr/local/wifibox/bhyve.conf.
 </p>
 
 <p align=left">
