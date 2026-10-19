@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Exec=/home/void/.local/bin/havoc
+Icon=terminal
+Terminal=false
+Categories=System;TerminalEmulator;
+Keywords=shell;prompt;command;commandline;
+
+Name=Havoc
+GenericName=Terminal
+Comment=A wayland native terminal emulator

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=View
+Exec=/home/void/.sh/View %f
+Categories=Other;
+NoDisplay=true
+MimeType=inode/directory
+Terminal=false
+Icon=multimedia-photo-viewer
