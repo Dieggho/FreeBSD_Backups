@@ -1,2 +1,2 @@
-#!/bin/sh
+#!/usr/bin/env dash
 dbus-launch waybar -c /home/void/.config/hypr/waybar/waybar.conf -s /home/void/.config/hypr/waybar/dark.css &

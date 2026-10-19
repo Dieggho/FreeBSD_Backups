@@ -1,0 +1,15 @@
+#!/usr/bin/env dash
+vte-2.91 \
+    --no-scrollbar \
+    --name=SmartTerm \
+    --no-use-theme-colors \
+    --foreground-color='#c9bba2' \
+    --background-color='#181A20' \
+    --cursor-background-color='#c9bba2' \
+    --cursor-foreground-color='#181A20' \
+    --highlight-background-color='#44475a' \
+    --highlight-foreground-color='#ffffff' \
+    --cursor-blink=off \
+    --font='DejaVuSansMono 13' \
+    --transparent=9 \
+    -- Htop

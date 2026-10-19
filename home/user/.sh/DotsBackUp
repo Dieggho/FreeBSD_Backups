@@ -1,2 +1,2 @@
-#!/bin/sh
-doas rsync -av /home/void/.[^.]* /mnt/
+#!/usr/bin/env dash
+doas rsync --update -av /home/void/.[^.]* "$@" 

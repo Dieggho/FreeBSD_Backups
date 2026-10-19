@@ -3,9 +3,10 @@
 pkill fuzzel 2>/dev/null
 
 entries="  Smart-terminal
-  Deadbeef
+  Music
   Telegram
   Browser
+  Transmission
   Calculator
   Editor
   Gucharmap
@@ -16,20 +17,23 @@ entries="  Smart-terminal
   File"
 
 
-selected=$(printf '%s\n' "$entries" | fuzzel --dmenu --lines 12 --width 20 --anchor top-left --prompt "Applications > " | awk '{print tolower($2)}')
+selected=$(printf '%s\n' "$entries" | fuzzel --dmenu --lines 13 --width 20 --anchor top-left --prompt "Applications > " | awk '{print tolower($2)}')
 
 case "$selected" in
   file)
     pcmanfm &
     ;;
-  deadbeef)
-    deadbeef &
+  music)
+    pragha &
     ;;
   telegram)
     Telegram &
     ;;
   browser)
     firefox &
+    ;;
+  transmission)
+    transmission-gtk &
     ;;
   calculator)
     galculator &
@@ -44,7 +48,7 @@ case "$selected" in
     nwg-look &
     ;;
   gimp)
-    gimp-2.10 &
+    gimp &
     ;;
   waypaper)
     waypaper &

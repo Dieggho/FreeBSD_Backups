@@ -1,4 +1,4 @@
 #!/usr/bin/env dash
-#doas ifconfig wlan0 down
-dbus-launch waybar -c /home/void/.config/labwc/config.jsonc -s /home/void/.config/labwc/style.css
+dbus-launch waybar -c /home/void/.config/labwc/config.jsonc -s /home/void/.config/labwc/style.css &
+waypaper --restore &
 

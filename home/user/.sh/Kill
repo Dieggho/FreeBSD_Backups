@@ -1,9 +1,9 @@
-#!/bin/sh
+#!/usr/bin/env dash
 # killall -u void
-killall xdg-desktop-portal
-killall at-spi2-registryd
-killall at-spi-bus-launcher
-killall xdg-permission-store
-killall dbus-daemon
-killall wireplumber
-killall pipewire
+killall xdg-desktop-portal 
+killall at-spi2-registryd 
+killall at-spi-bus-launcher 
+killall xdg-permission-store 
+killall dbus-daemon 
+killall wireplumber 
+killall pipewire 

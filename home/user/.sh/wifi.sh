@@ -1,7 +1,7 @@
-#!/bin/sh
+#!/usr/bin/env dash
 
 if ifconfig wifibox0 | grep -q "inet "; then
     echo "   on"
 else
-    echo "󰖪   off"
+    echo "󰖪i   off"
 fi

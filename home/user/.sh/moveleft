@@ -1,2 +1,2 @@
-#!/bin/sh
+#!/usr/bin/env dash
 hyprctl dispatch 'hl.dsp.window.move({ direction = "left" })'

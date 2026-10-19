@@ -1,0 +1,3 @@
+#!/usr/bin/env dash
+cd $( dirname "$@")
+foot -a SmartTerm -e ffmpeg -i "$@" -vn -acodec libmp3lame -ac 2 -qscale:a 4 -ar 48000 "$@".mp3

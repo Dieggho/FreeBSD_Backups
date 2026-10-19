@@ -1,0 +1,8 @@
+#!/bin/sh
+cage \
+  -s -d -- \
+  wlvncc \
+    --hide-cursor \
+    --encodings=open-h264 \
+    127.0.0.1 5900
+  clear

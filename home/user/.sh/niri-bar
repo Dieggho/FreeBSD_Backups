@@ -1,0 +1,5 @@
+#!/usr/bin/env dash
+dbus-launch waybar -c /home/void/.config/niri/config.jsonc -s /home/void/.config/niri/style.css &
+waypaper --restore &
+rm /home/void/*.core &
+

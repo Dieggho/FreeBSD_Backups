@@ -1,2 +1,5 @@
-#!/bin/sh
+#!/usr/bin/env dash
+clear
 dbus-run-session start-hyprland
+clear
+hyprland --version

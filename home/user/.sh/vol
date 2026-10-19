@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env dash
 
 VOL=$(mixer vol | awk -F '[=:]' '/vol.volume/ {printf "%.0f", $2 * 100}')
 
