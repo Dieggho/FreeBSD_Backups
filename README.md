@@ -1,4 +1,8 @@
 This is a simple backup of my Wayland only FreeBSD
+Despite having my local zfs backups in a ssd, I created this repo to share my experience.
+
+It uses wifibox for a fast wifi experience showing off bhyve capabilities, so if you intend to use be aware that you have to change the hardware passthrough in /boot/loader.config and /usr/local/wifibox/bhyve.conf.
+No xwayland, it's pure Wayland on FreeBSD.
 
 
 <p align="center">
