@@ -1,5 +1,8 @@
 <p align=left">
-This is a simple backup of my Wayland only FreeBSD
+</p>
+
+<p align=left">
+This is a simple backup of my Hyprland FreeBSD setup.
 Despite having my local zfs backups in a ssd, I created this repo to share my experience.
 </p>
 
