@@ -1,15 +1,17 @@
 #!/bin/sh
 doas bhyve \
   -c sockets=1,cores=4,threads=1 \
-  -m 6G \
+  -m 4G \
   -A -H -P -w -S \
   -K br \
-  -s 31,lpc \
-  -s 4:0,virtio-net,tap2 \
-  -s 5:0,ahci-cd,$1 \
-  -s 6,hda,play=/dev/dsp0 \
+  -s 0,hostbridge \
+  -s 1,xhci,tablet \
+  -s 2,lpc \
+  -s 3:0,virtio-net,tap2 \
+  -s 4:0,ahci-cd,$1 \
+  -s 5,hda,play=/dev/dsp0 \
+  -s 6,fbuf,tcp=127.0.0.1:5900,w=1920,h=1080,wait \
   -l bootrom,/usr/local/share/edk2-bhyve/BHYVE_UEFI_CODE.fd \
-  -s 29,fbuf,tcp=127.0.0.1:5900,w=1920,h=1080,wait \
   -l com1,stdio \
   $2
   doas bhyvectl --vm=$2 --destroy
