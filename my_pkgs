@@ -14,7 +14,6 @@ foot \
 fuzzel \
 galculator \
 gimp3-app \
-gpu-firmware-intel-kmod-kabylake \
 grim \
 gsimplecal \
 gucharmap \
@@ -30,7 +29,6 @@ neofetch \
 nerd-fonts-dejavusansmono \
 nerd-fonts-ubuntu \
 nwg-look \
-openjph-backup-libopenjph.so.0.30 \
 pcmanfm-gtk3 \
 pkg \
 pragha \
@@ -49,7 +47,6 @@ waybar \
 wayland-logout \
 wayland-protocols \
 wf-recorder \
-wifi-firmware-iwlwifi-kmod-9000 \
 wifibox \
 wlrctl \
 wlvncc \
