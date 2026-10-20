@@ -1,9 +1,10 @@
 #!/bin/sh
 doas bhyve \
-  -c 4 \
+  -c sockets=1,cores=4,threads=1 \
   -m 6G \
-  -A -H -P -w \
+  -A -H -P -w -S \
   -K br \
+  -s 0,hostbridge \
   -s 31,lpc \
   -s 4:0,ahci-cd,$1 \
   -s 5:0,virtio-net,slirp,open \

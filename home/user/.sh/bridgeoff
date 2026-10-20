@@ -1,0 +1,20 @@
+#!/bin/sh
+echo "=== Desativando Rede do bhyve ==="
+
+# 1. Para o Servidor DHCP
+echo "Parando dnsmasq..."
+doas service dnsmasq onestop
+
+# 2. Desativa o Firewall PF (opcional, remova se usar o PF para outras coisas)
+echo "Desativando firewall PF..."
+doas pfctl -d 2>/dev/null
+
+# 3. Destrói as Interfaces Virtuais criadas
+echo "Removendo interfaces virtuais (bridge0 e tap2)..."
+doas ifconfig bridge0 destroy 2>/dev/null
+doas ifconfig tap2 destroy 2>/dev/null
+
+# 4. Desativa o encaminhamento de pacotes no kernel
+doas sysctl net.inet.ip.forwarding=0 >/dev/null
+
+echo "=== Sistema limpo e restaurado! ==="

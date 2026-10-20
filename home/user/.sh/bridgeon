@@ -1,0 +1,28 @@
+#!/bin/sh
+echo "=== Habilitando Rede para bhyve (Wifibox NAT) ==="
+
+# 1. Configurações de Roteamento no Kernel
+doas sysctl net.link.tap.up_on_open=1 >/dev/null
+doas sysctl net.inet.ip.forwarding=1 >/dev/null
+doas sysctl net.link.bridge.pfil_member=0 >/dev/null
+doas sysctl net.link.bridge.pfil_bridge=0 >/dev/null
+doas sysctl net.link.bridge.pfil_onlyip=0 >/dev/null
+
+# 2. Carrega e Ativa o Firewall PF com as regras de NAT
+doas kldload pf 2>/dev/null
+doas pfctl -e 2>/dev/null
+doas pfctl -F all -f /etc/pf.conf
+
+# 3. Cria e Configura as Interfaces Virtuais
+echo "Criando interfaces de rede..."
+doas ifconfig bridge0 create 2>/dev/null
+doas ifconfig tap2 create 2>/dev/null
+doas ifconfig bridge0 addm tap2
+doas ifconfig bridge0 inet 192.168.100.1/24 up
+doas ifconfig tap2 up
+
+# 4. Inicia o Servidor DHCP (dnsmasq) de forma temporária
+echo "Iniciando servidor DHCP (dnsmasq)..."
+doas service dnsmasq onestart
+
+echo "=== Pronto! Pode iniciar a sua VM bhyve com o tap2 ==="
