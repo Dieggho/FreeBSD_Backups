@@ -18,9 +18,12 @@ No xwayland, it's pure Wayland on FreeBSD.
 </p>
 
 <p align="center">
-  <img src="home/user/Pictures/Screeshots/Mon Oct 19 12%3A09%3A09 -03 2026.png" height="1080" width="1920" alt="Texto Alternativo">
+  <img src="home/user/Pictures/Screeshots/Tue Oct 20 05:35:48 -03 2026.png" height="1080" width="1920" alt="Texto Alternativo">
 </p>
 
+<p align="center">
+  <img src="home/user/Pictures/Screeshots/Mon Oct 19 12%3A19%3A38 -03 2026.png" height="1080" width="1920" alt="Texto Alternativo">
+</p>
 
 <p align="center">
   <img src="home/user/Pictures/Screeshots/Mon Oct 19 12%3A19%3A38 -03 2026.png" height="1080" width="1920" alt="Texto Alternativo">
