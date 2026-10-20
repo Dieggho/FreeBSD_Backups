@@ -11,6 +11,9 @@ It uses wifibox for a fast wifi experience showing off bhyve capabilities, so if
 </p>
 
 <p align=left">
+</p>
+
+<p align=left">
 No xwayland, it's pure Wayland on FreeBSD.
 </p>
 
