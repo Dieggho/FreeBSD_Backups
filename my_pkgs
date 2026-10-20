@@ -1,8 +1,11 @@
-pkg install \
+#!/bin/sh 
+pkg install  \
 7-zip \
-bhyve-firmware \
+awww \
+cage \
 curl \
 dash \
+dnsmasq \
 doas \
 drm-66-kmod \
 ffmpegthumbnailer \
@@ -20,13 +23,14 @@ hyprland \
 hyprland-protocols \
 hyprpicker \
 imv \
+lite-xl \
 mako \
-mousepad \
 mpv \
 neofetch \
 nerd-fonts-dejavusansmono \
 nerd-fonts-ubuntu \
 nwg-look \
+openjph-backup-libopenjph.so.0.30 \
 pcmanfm-gtk3 \
 pkg \
 pragha \
@@ -38,7 +42,7 @@ skeuos-gtk-themes \
 slurp \
 telegram-desktop \
 transmission-cli \
-ufetch \
+transmission-gtk \
 unrar \
 unzip \
 waybar \
@@ -48,5 +52,7 @@ wf-recorder \
 wifi-firmware-iwlwifi-kmod-9000 \
 wifibox \
 wlrctl \
+wlvncc \
 wtype \
-xdg-desktop-portal 
+xdg-desktop-portal \
+xwayland 
