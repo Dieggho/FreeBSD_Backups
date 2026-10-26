@@ -29,11 +29,6 @@ No xwayland, it's pure Wayland on FreeBSD.
 
 
 <p align="center">
-  <img src="home/user/Pictures/Screeshots/Tue Oct 20 05:35:48 -03 2026.png" height="1080" width="1920" alt="BHyve running NixOS">
-</p>
-
-
-<p align="center">
   <img src="home/user/Pictures/Screeshots/Sat Jul 11 18:30:54 -03 2026.png" height="1080" width="1920" alt="Texto Alternativo">
 </p>
 
