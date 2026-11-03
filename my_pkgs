@@ -51,5 +51,4 @@ wifibox \
 wlrctl \
 wlvncc \
 wtype \
-xdg-desktop-portal \
-xwayland 
+xdg-desktop-portal 
