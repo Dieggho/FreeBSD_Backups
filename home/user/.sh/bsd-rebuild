@@ -1,0 +1,134 @@
+#!/bin/sh
+#
+# bsd-rebuild - cria e prepara um Boot Environment vazio do FreeBSD.
+#
+# Uso:
+#   doas ./bsd-rebuild NOME_DO_BE
+#
+# Variáveis opcionais:
+#   MOUNTPOINT=/mnt
+#   BASE_PACKAGES="FreeBSD-kernel-generic FreeBSD-set-base"
+#   EXTRA_PACKAGES="bhyve-firmware wifibox dnsmasq doas fastfetch"
+#   PKGBASE_KEYDIR=/usr/share/keys/pkgbase-15/trusted
+#
+set -eu
+
+usage()
+{
+    echo "Uso: $0 NOME_DO_BE" >&2
+    exit 2
+}
+
+[ "$#" -eq 1 ] || usage
+
+BE_NAME=$1
+MOUNTPOINT=${MOUNTPOINT:-/mnt}
+PKGBASE_KEYDIR=${PKGBASE_KEYDIR:-/usr/share/keys/pkgbase-15/trusted}
+
+BASE_PACKAGES=${BASE_PACKAGES:-"FreeBSD-kernel-generic FreeBSD-set-base"}
+EXTRA_PACKAGES=${EXTRA_PACKAGES:-"bhyve-firmware wifibox dnsmasq doas fastfetch"}
+
+ROOT=$MOUNTPOINT
+MOUNTED=0
+
+cleanup()
+{
+    if [ "$MOUNTED" -eq 1 ]; then
+        echo "Desmontando o Boot Environment ${BE_NAME}..."
+        bectl unmount "$BE_NAME" || true
+    fi
+}
+
+trap cleanup EXIT
+trap 'exit 1' HUP INT TERM
+
+# Não reutiliza um ponto de montagem que já esteja ocupado.
+if mount | awk -v p="$MOUNTPOINT" '$3 == p { found=1 } END { exit !found }'; then
+    echo "Erro: $MOUNTPOINT já está montado." >&2
+    exit 1
+fi
+
+mkdir -p "$MOUNTPOINT"
+
+# Cria o BE vazio e monta-o.
+echo "Criando Boot Environment: $BE_NAME"
+bectl create -E "$BE_NAME"
+
+echo "Montando em $MOUNTPOINT"
+bectl mount "$BE_NAME" "$MOUNTPOINT"
+MOUNTED=1
+
+# Copia um diretório de chaves quando ele existe e contém arquivos.
+copy_tree()
+{
+    source_dir=$1
+    destination_dir=$2
+
+    if [ -d "$source_dir" ]; then
+        mkdir -p "$destination_dir"
+        cp -Rp "$source_dir"/. "$destination_dir"/
+    else
+        echo "Aviso: diretório não encontrado: $source_dir" >&2
+    fi
+}
+
+# Copia um arquivo preservando permissões e timestamps.
+copy_file()
+{
+    source_file=$1
+    destination_file=$2
+
+    if [ -f "$source_file" ]; then
+        mkdir -p "$(dirname "$destination_file")"
+        cp -p "$source_file" "$destination_file"
+    else
+        echo "Aviso: arquivo não encontrado: $source_file" >&2
+    fi
+}
+
+echo "Preparando chaves de assinatura..."
+copy_tree /usr/share/keys/pkg/trusted "$ROOT/usr/share/keys/pkg/trusted"
+copy_tree "$PKGBASE_KEYDIR" "$ROOT/usr/share/keys/pkgbase-15/trusted"
+
+# A configuração do repositório precisa existir antes de chamar pkg.
+copy_file /etc/pkg/FreeBSD.conf "$ROOT/etc/pkg/FreeBSD.conf"
+
+echo "Instalando pacotes-base..."
+# A expansão intencional permite definir listas de pacotes por variável.
+# BASE_PACKAGES e EXTRA_PACKAGES devem conter nomes de pacotes separados por espaço.
+# shellcheck disable=SC2086
+pkg -r "$ROOT" install $BASE_PACKAGES
+
+# Aplica as configurações do host depois que os arquivos-base foram instalados.
+echo "Aplicando configurações do sistema..."
+copy_file /etc/fstab "$ROOT/etc/fstab"
+copy_file /etc/rc.conf "$ROOT/etc/rc.conf"
+copy_file /etc/resolv.conf "$ROOT/etc/resolv.conf"
+copy_file /boot/loader.conf "$ROOT/boot/loader.conf"
+
+# Preserva as fontes de usuários e grupos e recria os bancos derivados no BE.
+copy_file /etc/master.passwd "$ROOT/etc/master.passwd"
+copy_file /etc/group "$ROOT/etc/group"
+pwd_mkdb -d "$ROOT/etc" "$ROOT/etc/master.passwd"
+
+# Imagens de boot e arquivos de inicialização do root.
+copy_tree /boot/images "$ROOT/boot/images"
+copy_file /root/.shrc "$ROOT/root/.shrc"
+copy_file /root/.exrc "$ROOT/root/.exrc"
+
+echo "Instalando pacotes adicionais..."
+# shellcheck disable=SC2086
+pkg -r "$ROOT" install $EXTRA_PACKAGES
+
+# Configurações dos serviços instalados.
+copy_tree /usr/local/etc/wifibox "$ROOT/usr/local/etc/wifibox"
+copy_file /usr/local/etc/dnsmasq.conf "$ROOT/usr/local/etc/dnsmasq.conf"
+
+echo "Limpando cache de pacotes do ambiente alternativo..."
+pkg -r "$ROOT" clean -a
+
+echo
+echo "Concluído: $BE_NAME"
+echo "O Boot Environment foi desmontado automaticamente."
+echo "Para ativá-lo, revise o ambiente e então execute:"
+echo "  bectl activate $BE_NAME"
