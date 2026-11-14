@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=bhyve
+Exec=vmbhyve %f %f
+Icon=/home/void/.local/share/icons/Papirus/48x48/apps/BhyveLogo.png
+Categories=Other;
+NoDisplay=true
+MimeType=application/vnd.efi.iso
+#Terminal=true
+#X-KeepTerminal=false

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Transmission
+Exec=Transmission %f
+Icon=transmission
+Categories=Other;
+NoDisplay=true
+MimeType=application/x-bittorrent
+Terminal=false

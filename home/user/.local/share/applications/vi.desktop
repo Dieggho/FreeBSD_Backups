@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=vi
+Exec=foot -a vi vi %f 
+Categories=Other;
+Icon=/home/void/.local/share/icons/Papirus/48x48/apps/vi.png
+NoDisplay=true
+MimeType=text/x-lua;text/plain;
+Terminal=false
+X-KeepTerminal=true

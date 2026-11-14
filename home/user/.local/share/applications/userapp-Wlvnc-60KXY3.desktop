@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Wlvnc
+Exec=Wlvnc %f
+Icon=/home/void/.local/share/icons/Papirus/42x42/apps/DaemonVm.png
+Categories=Other;
+#NoDisplay=true
+MimeType=application/vnd.efi.iso
+Terminal=false
