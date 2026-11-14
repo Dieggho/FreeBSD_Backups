@@ -1,3 +1,0 @@
-#!/usr/bin/env dash 
-cd ~/Documents
-foot -a vi -e vi "$@"
