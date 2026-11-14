@@ -5,44 +5,47 @@ HISTSIZE=9999
 # ALIASES 
 # =====================================================
 
-alias zzz='doas zzz'
-alias reboot='doas reboot'
+alias BSD='clear; fastfetch; gpart show nda0;'
 alias Exit='clear ; exit'
-alias poweroff='doas poweroff'
-alias du-='doas du -hs ~ ; doas du -hs /usr/local'
-alias myip='curl ident.me; echo'
-alias bsd='clear; ufetch; gpart show ada0; '
-alias BSD='clear; neofetch; gpart show ada0;'
-alias shrc='vi ~/.shrc'
-alias exrc='vi ~/.exrc'
-alias su-='doas su -'
+alias exrc='vi ~/.shrc'
+alias bsd='clear; ufetch; gpart show nda0; '
 alias clvitmp='rm -fv /tmp/vi*'
+alias du-='doas du -hs ~ ; doas du -hs /usr/local'
+alias exrc='vi ~/.exrc'
+alias halt='doas halt'
 alias la='ls -la'
-alias pick='hyprpicker'
-alias pkgs='doas pkg search '
-alias pkgls='pkg prime-list '
-alias pkgup='doas pkg upgrade '
-alias pkgi='doas pkg install '
-# alias pkgrm='doas pkg remove $@ '
+alias lsblk='gpart show'
+alias lsvm='ls /dev/vmm/'
+alias lswifi='pciconf -lv | grep -B2 -A1 -i Wireless'
+alias myip='curl ident.me; echo'
+alias pick=hyprpicker
 alias pkg-resync='doas pkg-static upgrade -f'
-alias bsdup='doas freebsd-update fetch; doas freebsd-update install '
-alias bsdclr='doas rm -rf /boot/kernel.old /boot/modules.old'
-alias wifiup='doas service netif start wifibox0'
-alias wifidown='doas service netif stop wifibox0'
+alias pkgadd='doas pkg install '
+alias pkgls='pkg prime-list '
+alias pkgs='doas pkg search '
+alias poweroff='doas poweroff'
+alias reboot='doas reboot'
 alias scanwifi='doas wpa_cli scan; sleep 1; doas wpa_cli scan_results'
-alias wifireload='doas service netif restart wifibox0'
-alias viboot='doas vi /boot/loader.conf' 
+alias shrc='vi ~/.shrc'
+alias su-='doas su -'
+alias viboot='doas vi /boot/loader.conf'
+alias vibsd='doas vi /etc/rc.conf ; doas vi /etc/sysctl.conf ; doas vi /boot/loader.conf'
+alias vihypr='vi /home/void/.config/hypr/hyprland.lua'
 alias virc='doas vi /etc/rc.conf'
 alias visysctl='doas vi /etc/sysctl.conf'
-alias vibsd='doas vi /etc/rc.conf ; doas vi /etc/sysctl.conf ; doas vi /boot/loader.conf'
 alias viwifi='doas vi /usr/local/etc/wifibox/wpa_supplicant/wpa_supplicant.conf'
-alias lswifi='pciconf -lv | grep -B2 -A1 -i Wireless'
-alias vihypr='vi /home/void/.config/hypr/hyprland.lua'
-alias lsblk='gpart show'
+alias wifidown='doas service netif stop wifibox0'
+alias wifireload='doas service netif restart wifibox0'
+alias wifiup='doas service netif start wifibox0'
+alias zzz='doas zzz'
 
 # =====================================================
 # FUNCTIONS
 # =====================================================
+
+vmkill() {
+   doas bhyvectl --destroy --vm=$1
+}
 
 rename(){
 for file in *; do
@@ -63,6 +66,13 @@ for file in *; do
 done
 }
 
+pkgup() {
+    doas pkg upgrade
+    #uname -r
+    #echo
+    #bectl list
+    echo "packages installed: [ $(pkg query '%n' | wc -l | tr -d ' ') ]"
+}
 pkgrm() {
     doas pkg remove $@
     doas pkg autoremove
@@ -80,71 +90,22 @@ pkgq() {
 echo "packages installed: [ $(pkg query '%n' | wc -l | tr -d ' ') ]"
 }
 
-fbsdup(){
-    echo "pkg update..."
-    doas pkg upgrade
-    echo
-    echo "freebsd update..."
-    doas freebsd-update fetch
-    doas freebsd-update install
-    echo
-    if [ -f /var/run/reboot-required ]; then
-    echo "reboot required"
-    fi
-    bectl list
-    echo
-    uname -r
-    echo "packages installed: [ $(pkg query '%n' | wc -l | tr -d ' ') ]"    
-}
-
-bsd-relup() {
-    set -e
-
-    target="${1:?usage: relup <release-version>}"
-
-    be="relup-${target}-$(date +%Y%m%d-%H%M)"
-
-    echo "[ creating boot environment ]"
-    doas bectl create "$be"
-    doas bectl activate "$be"
-
-    echo
-    echo "[ fetching FreeBSD ${target} ]"
-    doas freebsd-update upgrade -r "$target"
-
-    echo
-    echo "[ installing upgrade stage 1 ]"
-    doas freebsd-update install
-
-    echo
-    echo "[ release upgrade prepared ]"
-    echo "reboot required to continue upgrade"
-
-    echo
-    echo "active boot environment: $be"
-}
-
-bsd-relup-finish() {
-    set -e
-
-    echo "[ continuing freebsd-update ]"
-    doas freebsd-update install
-
-    echo
-    echo "[ resyncing packages ]"
-    doas pkg-static upgrade -f
-
-    echo
-    echo "[ finalizing upgrade ]"
-    doas freebsd-update install || true
-
-    echo
-    echo "[ system status ]"
-    uname -a
-
-    echo
-    echo "packages installed: [ $(pkg query '%n' | wc -l | tr -d ' ') ]"
-}
+#fbsdup(){
+ #   echo "pkg update..."
+ #   doas pkg upgrade
+ #   echo
+ #   echo "freebsd update..."
+ #   doas freebsd-update fetch
+ #   doas freebsd-update install
+ #   echo
+ #   if [ -f /var/run/reboot-required ]; then
+ #   echo "reboot required"
+ #   fi
+ #   bectl list
+ #   echo
+ #   uname -r
+ #   echo "packages installed: [ $(pkg query '%n' | wc -l | tr -d ' ') ]"    
+#}
 
 beroll() {
     doas bectl activate "$1"
@@ -159,13 +120,11 @@ be-pkgup() {
     doas pkg upgrade
 }
 
-# bindings
+## mksh bindings
 #bind '^L=clear-screen'
 #bind '^[[A=up-history'
 #bind '^[[B=down-history'
 #bind '^[[C=forward-char'
 #bind '^[[D=backward-char'
-
+#
 #PS1=$'\e[1;31m>\e[0m '
-
-
