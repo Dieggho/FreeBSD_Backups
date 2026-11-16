@@ -123,6 +123,7 @@ pkg -r "$ROOT" install $EXTRA_PACKAGES
 # Configurações dos serviços instalados.
 copy_tree /usr/local/etc/wifibox "$ROOT/usr/local/etc/wifibox"
 copy_file /usr/local/etc/dnsmasq.conf "$ROOT/usr/local/etc/dnsmasq.conf"
+copy_file /usr/local/etc/doas.conf "$ROOT/usr/local/etc/doas.conf"
 
 echo "Limpando cache de pacotes do ambiente alternativo..."
 pkg -r "$ROOT" clean -a

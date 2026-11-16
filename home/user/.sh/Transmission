@@ -1,2 +1,4 @@
-#!/usr/bin/env dash
+#!/bin/sh
+rm -r /home/void/.config/transmission/
 foot -a transmission -e transmission-cli "$@"
+killall transmission-cli
