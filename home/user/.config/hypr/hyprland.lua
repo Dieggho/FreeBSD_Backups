@@ -48,7 +48,7 @@ local reloadwaybar = "reloadwaybar"
 -- Or execute your favorite apps at launch like this:
 --
 hl.on("hyprland.start", function () 
-   hl.exec_cmd("waypaper --restore & rm :0 & rm *.core & backlight 100% & cp .config/foot/hyprland-foot.ini .config/foot/foot.ini & mako & waybar & dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY XAUTHORITY & pipewire & wireplumber & mako & mixer pcm=1 & mixer vol=0.65 & mixer rec=0.5 &")
+   hl.exec_cmd("waypaper --restore & rm :0 & rm *.core & backlight 100% & mako & waybar & dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY XAUTHORITY & pipewire & wireplumber & mako & mixer pcm=1 & mixer vol=0.55 & mixer rec=0.55 &")
 end)
 
 
@@ -96,8 +96,8 @@ hl.config({
         border_size = 6,
 
         col = {
-            active_border   = { colors = {"rgb(16181D)", "rgb(0c0e0e)", "rgb(0c0e0e)"}, angle = 99 },
-            inactive_border = "rgb(16181D)",
+            active_border   = { colors = {"rgb(181A20)", "rgb(0c0e0e)", "rgb(0c0e0e)"}, angle = 99 },
+            inactive_border = "rgb(181A20)",
         },
 
         -- Set to true to enable resizing windows by clicking and dragging on borders and gaps
@@ -107,7 +107,7 @@ hl.config({
         allow_tearing = false,
         extend_border_grab_area = 1,
         hover_icon_on_border = true,
-        layout = "master",
+        layout = "dwindle",
     },
 
     decoration = {
@@ -121,15 +121,18 @@ hl.config({
         shadow = {
             enabled      = true,
             range        = 6,
-            render_power = 6,
+            render_power = 4,
             color        = 0xee000000,
         },
 
         blur = {
-            enabled   = true,
-            size      = 4,
-            passes    = 4,
-            vibrancy  = 0.1696,
+            enabled = true,
+            size = 3,
+            passes = 5,
+            vibrancy = 0.1696,
+            ignore_opacity = false, 
+            new_optimizations = true,
+            special = true,
         },
     },
 
@@ -186,7 +189,7 @@ hl.animation({ leaf = "zoomFactor",    enabled = true,  speed = 7,       bezier 
 for i = 1, 7 do
     hl.workspace_rule({
         workspace = tostring(i),
-        persistent = true,
+        persistent = false,
     })
 end
 -- See https://wiki.hypr.land/Configuring/Layouts/Dwindle-Layout/ for more
@@ -403,14 +406,20 @@ hl.window_rule({
 })
 
 hl.window_rule({
-    name  = "galculator",
-    match = { class = "galculator" },
+    name  = "xfce4-about",
+    match = { class = "xfce4-about" },
     float      = true,
 })
 
 hl.window_rule({
-    name  = "Kotatogram",
-    match = { class = "io.github.kotatogram"},
+    name  = "galculator",
+    match = { class = "galculator" },
+    float = true,
+})
+
+hl.window_rule({
+    name  = "org.telegram.desktop",
+    match = { class = "org.telegram.desktop"},
     workspace = "1",
 })
 
@@ -427,12 +436,6 @@ hl.window_rule({
 })
 
 hl.window_rule({
-    name  = "foot",
-    match = { class = "foot" },
-    workspace = 5,
-})
-
-hl.window_rule({
     name  = "firefox",
     match = { class = "firefox"},
     workspace = 2,
@@ -441,6 +444,12 @@ hl.window_rule({
 hl.window_rule({
     name  = "transmission",
     match = { class = "transmission"},
+    workspace = 3,
+})
+
+hl.window_rule({
+    name  = "com.transmissionbt.transmission",
+    match = { class = "com.transmissionbt.transmission"},
     workspace = 3,
 })
 
@@ -463,6 +472,12 @@ hl.window_rule({
 })
 
 hl.window_rule({
+    name  = "vi",
+    match = { class = "vi"},
+    workspace = 4,
+})
+
+hl.window_rule({
     name  = "gucharmap",
     match = { class = "gucharmap"},
     workspace = 4,
@@ -472,6 +487,24 @@ hl.window_rule({
     name  = "vi",
     match = { class = "vi"},
     workspace = 4,
+})
+
+hl.window_rule({
+    name  = "foot",
+    match = { class = "foot" },
+    workspace = 5,
+})
+
+hl.window_rule({
+    name  = "terminal",
+    match = { class = "terminal" },
+    workspace = 5,
+})
+
+hl.window_rule({
+    name  = "havoc",
+    match = { class = "havoc" },
+    workspace = 5,
 })
 
 hl.window_rule({
@@ -512,17 +545,17 @@ hl.window_rule({
 })
 
 hl.window_rule({
-    name  = "Waypaper",
-    match = { class = "Waypaper" },
+    name  = "waypaper",
+    match = { class = "waypaper" },
     float = true,
     workspace = 7,
 })
 
 hl.window_rule({
-    name  = "waypaper",
-    match = { class = "waypaper"},
-    float = true,
-    workspace = 7,
+    name  = "wlvncc",
+    match = { class = "wlvncc" },
+    fullscreen = true,
+    workspace = "special:magic",
 })
 
 hl.window_rule({
@@ -532,10 +565,83 @@ hl.window_rule({
     move = {1430, 40},
 })
 
-
-local myLayerRule = hl.layer_rule({
-  name  = "my-layer-rule",
+local waybarRule = hl.layer_rule({
+  name  = "waybar-rule",
   match = { namespace = "waybar" },
   blur  = true,
 })
 
+local slurpRule = hl.layer_rule({
+  name  = "slurp-rule",
+  match = { namespace = "slurp" },
+  blur  = false,
+})
+
+hl.config({
+  xwayland = {
+    enabled = false,
+  },
+})
+
+waybarRule:set_enabled(true)
+slurpRule:set_enabled(true)
+
+hl.bind("mouse:273", function()
+    local win = hl.get_active_window()
+    if win and win.class == "foot" then
+        hl.dispatch(hl.dsp.window.drag())
+    else
+        return { ok = false } -- Passa o clique normal para outras janelas
+    end
+end, { mouse = true, auto_consuming = true })
+
+hl.bind("mouse:273", function()
+    local win = hl.get_active_window()
+    if win and win.class == "SmartTerm" then
+        hl.dispatch(hl.dsp.window.drag())
+    else
+        return { ok = false } -- Passa o clique normal para outras janelas
+    end
+end, { mouse = true, auto_consuming = true })
+
+local last_click = 0
+local double_click_delay = 0.1 
+
+hl.bind("mouse:273", function()
+    local win = hl.get_active_window()
+    
+    -- Verifica se a janela ativa é o seu terminal (ex: kitty, foot, Alacritty)
+    if win and win.class == "foot" then
+        local now = os.clock()
+        if (now - last_click) <= double_click_delay then
+            hl.dispatch(hl.dsp.window.close())
+            last_click = 0
+            return
+        end
+        last_click = now
+    end
+    
+    -- Repassa o clique normal caso não seja duplo clique ou não seja o terminal
+    return { ok = false }
+end, { mouse = true, auto_consuming = true })
+
+local last_click = 0
+local double_click_delay = 0.05
+
+hl.bind("mouse:273", function()
+    local win = hl.get_active_window()
+
+    -- Verifica se a janela ativa é o seu terminal (ex: kitty, foot, Alacritty)
+    if win and win.class == "SmartTerm" then
+        local now = os.clock()
+        if (now - last_click) <= double_click_delay then
+            hl.dispatch(hl.dsp.window.close())
+            last_click = 0
+            return
+        end
+        last_click = now
+    end
+
+    -- Repassa o clique normal caso não seja duplo clique ou não seja o terminal
+    return { ok = false }
+end, { mouse = true, auto_consuming = true })

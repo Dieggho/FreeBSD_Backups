@@ -1,4 +1,4 @@
-#!/usr/bin/env dash
+#!/bin/sh
 
 pkill fuzzel 2>/dev/null
 
@@ -10,12 +10,12 @@ selected=$(printf '%s\n' "$entries" | fuzzel --lines 3 --dmenu --width 13 --anch
 
 case "$selected" in
   logout)
-   killall -u void 
+   Kill ; wlrctl window close ; sleep 1 ; wayland-logout #hyprctl dispatch exit
     ;;
   reboot)
-    doas reboot 
+    Kill ; wlrctl window close ; sleep 1 ; mdo reboot 
     ;;
    shutdown)
-    doas poweroff 
+    Kill ; wlrctl window close ; sleep 1 ; mdo poweroff 
     ;;
 esac
