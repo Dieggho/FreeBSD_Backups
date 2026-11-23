@@ -10,41 +10,41 @@ alias Exit='clear ; exit'
 alias exrc='vi ~/.shrc'
 alias bsd='clear; ufetch; gpart show nda0; '
 alias clvitmp='rm -fv /tmp/vi*'
-alias du-='doas du -hs ~ ; doas du -hs /usr/local'
+alias du-='mdo du -hs ~ ; mdo du -hs /usr/local'
 alias exrc='vi ~/.exrc'
-alias halt='doas halt'
+alias halt='mdo halt'
 alias la='ls -la'
 alias lsblk='gpart show'
 alias lsvm='ls /dev/vmm/'
 alias lswifi='pciconf -lv | grep -B2 -A1 -i Wireless'
 alias myip='curl ident.me; echo'
 alias pick=hyprpicker
-alias pkg-resync='doas pkg-static upgrade -f'
-alias pkgadd='doas pkg install '
+alias pkg-resync='mdo pkg-static upgrade -f'
+alias pkgadd='mdo pkg install '
 alias pkgls='pkg prime-list'
-alias pkgs='doas pkg search '
-alias poweroff='doas poweroff'
-alias reboot='doas reboot'
-alias scanwifi='doas wpa_cli scan; sleep 1; doas wpa_cli scan_results'
+alias pkgs='mdo pkg search '
+alias poweroff='mdo poweroff'
+alias reboot='mdo reboot'
+alias scanwifi='mdo wpa_cli scan; sleep 1; mdo wpa_cli scan_results'
 alias shrc='vi ~/.shrc'
-alias su-='doas su -'
-alias viboot='doas vi /boot/loader.conf'
-alias vibsd='doas vi /etc/rc.conf ; doas vi /etc/sysctl.conf ; doas vi /boot/loader.conf'
+alias su-='mdo env HOME=/root ENV=/root/.shrc /bin/sh'
+alias viboot='mdo vi /boot/loader.conf'
+alias vibsd='mdo vi /etc/rc.conf ; mdo vi /etc/sysctl.conf ; mdo vi /boot/loader.conf'
 alias vihypr='vi /home/void/.config/hypr/hyprland.lua'
-alias virc='doas vi /etc/rc.conf'
-alias visysctl='doas vi /etc/sysctl.conf'
-alias viwifi='doas vi /usr/local/etc/wifibox/wpa_supplicant/wpa_supplicant.conf'
-alias wifidown='doas service netif stop wifibox0'
-alias wifireload='doas service netif restart wifibox0'
-alias wifiup='doas service netif start wifibox0'
-alias zzz='doas zzz'
+alias virc='mdo vi /etc/rc.conf'
+alias visysctl='mdo vi /etc/sysctl.conf'
+alias viwifi='mdo vi /usr/local/etc/wifibox/wpa_supplicant/wpa_supplicant.conf'
+alias wifidown='mdo service netif stop wifibox0'
+alias wifireload='mdo service netif restart wifibox0'
+alias wifiup='mdo service netif start wifibox0'
+alias zzz='mdo zzz'
 
 # =====================================================
 # FUNCTIONS
 # =====================================================
 
 vmkill() {
-   doas bhyvectl --destroy --vm=$1
+   mdo bhyvectl --destroy --vm=$1
 }
 
 pkgq() {
@@ -52,7 +52,7 @@ echo "packages installed: [ $(pkg query '%n' | wc -l | tr -d ' ') ]"
 }
 
 pkgup() {
-    doas pkg upgrade
+    mdo pkg upgrade
     #uname -r
     #echo
     #bectl list
@@ -60,15 +60,15 @@ pkgup() {
 }
 
 pkgrm() {
-    doas pkg remove $@
-    doas pkg autoremove
-    doas pkg clean -a
+    mdo pkg remove $@
+    mdo pkg autoremove
+    mdo pkg clean -a
     pkgq
 }
 
 pkgclr() {
-    doas pkg autoremove
-    doas pkg clean -a
+    mdo pkg autoremove
+    mdo pkg clean -a
     pkgq
 }
 
